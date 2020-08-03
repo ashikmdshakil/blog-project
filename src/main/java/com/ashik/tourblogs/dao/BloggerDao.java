@@ -46,7 +46,7 @@ public class BloggerDao {
 			exist = false;
 		}
 		// session.beginTransaction().commit();
-
+		session.close();
 		return exist;
 	}
 	
@@ -59,7 +59,7 @@ public class BloggerDao {
 		
 
 		Blogger blogger = (Blogger) query.uniqueResult();
-
+		session.close();
 		return blogger;
 	}
 	
@@ -68,7 +68,7 @@ public class BloggerDao {
 		Session session = (Session) HibernateUtil.getSessionFactory().openSession();
 		session.save(blog);
 		session.beginTransaction().commit();
-
+		session.close();
 	}
 
 	public static BloggerDao getBean() {

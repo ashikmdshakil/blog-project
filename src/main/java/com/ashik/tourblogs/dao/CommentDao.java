@@ -20,6 +20,7 @@ public class CommentDao {
 		Session session = (Session) HibernateUtil.getSessionFactory().openSession();
 		session.save(comment);                
 		session.beginTransaction().commit();
+		session.close();
 	}
 	
 	public void deleteComment(int comment_id) {
@@ -29,6 +30,7 @@ public class CommentDao {
 		Comment comment = (Comment) query.uniqueResult();
 		session.delete(comment);
 		session.beginTransaction().commit();
+		session.close();
 	}
 	
 	public static CommentDao getBean() {

@@ -21,6 +21,7 @@ public class BlogDao {
 		Query query = session.createQuery("from Blog order by time DESC");
 		List<Blog> blogs = query.list();                   
 		//session.beginTransaction().commit();
+		session.close();
 		return blogs;
 	}
 	public List<Blog> getMyBlogs(int id){
