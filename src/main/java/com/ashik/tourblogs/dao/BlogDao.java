@@ -32,6 +32,14 @@ public class BlogDao {
 		session.close();
 		return blogs;
 	}
+	public void deleteBlog(int id) {
+		Session session = (Session) HibernateUtil.getSessionFactory().openSession();
+		SQLQuery query = session.createSQLQuery("delete from Blog where id = '"+id+"'");
+		query.addEntity(Blog.class);
+		query.executeUpdate();
+		session.beginTransaction().commit();
+		session.close();
+	}
 	
 	public static BlogDao getBean() {
 		ApplicationContext context = new AnnotationConfigApplicationContext(com.ashik.tourblogs.dao.BlogDao.class);

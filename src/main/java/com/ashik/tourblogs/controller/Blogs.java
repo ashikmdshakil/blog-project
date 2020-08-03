@@ -27,8 +27,15 @@ public class Blogs extends HttpServlet {
 	}
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {	
-		request.setAttribute("blogs", blogservice.getBlogs());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
-		dispatcher.forward(request, response);
+		try {
+			request.setAttribute("blogs", blogservice.getBlogs());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
+			dispatcher.forward(request, response);
+		} catch (ServletException e) {
+			String message = "Something went wrong. Please try agaian ....";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("errorpage.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 }

@@ -23,22 +23,26 @@ import com.ashik.tourblogs.services.BloggerService;
 @WebServlet("/signup")
 public class SignUp extends HttpServlet {
 	private BloggerService bloggerservice = BloggerService.getBean();
-	private BloggerDao bloggerdao = BloggerDao.getBean();
 	BlogService blogservice = BlogService.getBean();
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-		bloggerdao.saveBlogger(request.getParameter("name"), request.getParameter("mail"),
-				request.getParameter("password"));
-		Blogger blogger = bloggerservice.bloggerInfo(request.getParameter("mail"));
-		HttpSession session = request.getSession();
-		session.setAttribute("blogger", blogger);
-		
-		request.setAttribute("blogs", blogservice.getBlogs());
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
-		dispatcher.forward(request, response);
-		
+		try {
+			bloggerservice.signup(request.getParameter("name"), request.getParameter("mail"),
+					request.getParameter("password"));
+			Blogger blogger = bloggerservice.bloggerInfo(request.getParameter("mail"));
+			HttpSession session = request.getSession();
+			session.setAttribute("blogger", blogger);
+			request.setAttribute("blogs", blogservice.getBlogs());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
+			dispatcher.forward(request, response);
+		} catch (ServletException e) {
+			String message = "Something went wrong ....";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("errorpage.jsp");
+			dispatcher.forward(request, response);
+		} 
+
 	}
 
 }

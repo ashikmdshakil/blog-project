@@ -4,9 +4,9 @@
 <hibernate-configuration>
  <session-factory name="">
   <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-  <property name="hibernate.connection.password">3ad2b0666db1edc3362fca95e79132444739936264465974b91f2e3ab8339b8e</property>
-  <property name="hibernate.connection.url">jdbc:postgresql://ec2-35-175-155-248.compute-1.amazonaws.com:5432/d7tnuhs6o8m0ri</property>
-  <property name="hibernate.connection.username">esrhrjnnuzcpuj</property>
+  <property name="hibernate.connection.password">1234</property>
+  <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/tourblogs</property>
+  <property name="hibernate.connection.username">postgres</property>
   <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
  </session-factory>

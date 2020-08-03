@@ -17,10 +17,17 @@ public class DeleteComment extends HttpServlet{
 	private CommentService commentservice = CommentService.getBean();
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("comment_id"));
-		commentservice.deleteComment(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("blogs");
-		dispatcher.forward(request, response);
+		try {
+			int id = Integer.parseInt(request.getParameter("comment_id"));
+			commentservice.deleteComment(id);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("blogs");
+			dispatcher.forward(request, response);
+		} catch (NumberFormatException e) {
+			String message = "Something went wrong. Please try agaian ....";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("errorpage.jsp");
+			dispatcher.forward(request, response);
+		} 
 	}
 
 }

@@ -23,15 +23,21 @@ public class PostBlogs extends HttpServlet{
 	private BlogService blogservice = BlogService.getBean();
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		blog.setTitle(request.getParameter("title"));
-		blog.setBlog(request.getParameter("blog"));
-		blog.setTime(LocalDateTime.now());
-		blog.setBlogger((Blogger)request.getSession().getAttribute("blogger"));
-		bloggerservice.post(blog);
-		
-		request.setAttribute("blogs", blogservice.getBlogs());
-		RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
-		dispatcher.forward(request, response);
+		try {
+			blog.setTitle(request.getParameter("title"));
+			blog.setBlog(request.getParameter("blog"));
+			blog.setTime(LocalDateTime.now());
+			blog.setBlogger((Blogger)request.getSession().getAttribute("blogger"));
+			bloggerservice.post(blog);
+			request.setAttribute("blogs", blogservice.getBlogs());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
+			dispatcher.forward(request, response);
+		} catch (ServletException e) {
+			String message = "Something went wrong. Please try agaian ....";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("errorpage.jsp");
+			dispatcher.forward(request, response);
+		} 
 	}
 
 }

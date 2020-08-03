@@ -17,12 +17,19 @@ public class Comment extends HttpServlet{
 	
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int blogger_id = Integer.parseInt(request.getParameter("blogger_id"));
-		int blog_id = Integer.parseInt(request.getParameter("blog_id"));
-		String comment = request.getParameter("comment");	
-		commentservice.postComment(blogger_id, blog_id, comment);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("blogs");
-		dispatcher.forward(request, response);
+		try {
+			int blogger_id = Integer.parseInt(request.getParameter("blogger_id"));
+			int blog_id = Integer.parseInt(request.getParameter("blog_id"));
+			String comment = request.getParameter("comment");	
+			commentservice.postComment(blogger_id, blog_id, comment);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("blogs");
+			dispatcher.forward(request, response);
+		} catch (NumberFormatException e) {
+			String message = "Something went wrong. Please try agaian ....";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("errorpage.jsp");
+			dispatcher.forward(request, response);
+		} 
 	}
 
 }

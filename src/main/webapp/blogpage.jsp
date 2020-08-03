@@ -94,7 +94,10 @@
                        <div style="display: block;">
                             <p style=" font-size: x-large;" style="font-size: x-large;"><c:out value="${blog.blog}"></c:out></p>
                              <c:if test="${blog.blogger.id == sessionScope.blogger.id }">
-								<button type="submit" class="btn btn-alert" style="float: right">delete</button>
+                             <form action = "deleteBlog" method = "post">
+                             		<input type = "hidden" name = "blog_id" value = "${blog.id}">
+                             		<button type="submit" class="btn btn-alert" style="float: right">delete</button>
+                             </form>
 						</c:if>
                         </div>
                        

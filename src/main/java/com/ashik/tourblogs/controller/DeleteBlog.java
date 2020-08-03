@@ -8,21 +8,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-@WebServlet("/logout")
-public class Logout extends HttpServlet{
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+import com.ashik.tourblogs.services.BlogService;
+
+@WebServlet("/deleteBlog")
+public class DeleteBlog extends HttpServlet {
+
+	private BlogService blogservice = BlogService.getBean();
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			HttpSession session = request.getSession();
-			session.invalidate();
-			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			int id = Integer.parseInt(request.getParameter("blog_id"));
+			blogservice.deleteBlog(id);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("myblogs");
 			dispatcher.forward(request, response);
-		} catch (ServletException e) {
+		} catch (NumberFormatException e) {
 			String message = "Something went wrong. Please try agaian ....";
 			request.setAttribute("message", message);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("errorpage.jsp");
 			dispatcher.forward(request, response);
 		} 
+
 	}
 }

@@ -11,15 +11,17 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ashik.tourblogs.dao.BloggerDao;
+
 /**
- * Servlet Filter implementation class LoginFilter
+ * Servlet Filter implementation class SignUpFilter
  */
-public class LoginFilter implements Filter {
+public class SignUpFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public LoginFilter() {
+    public SignUpFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -34,17 +36,22 @@ public class LoginFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("filter is invoked");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		if(req.getParameter("mail").equals("ashik@gmail.com")) {
+		String mail = req.getParameter("mail");
+		
+		BloggerDao bloggerdao = BloggerDao.getBean();
+		if(bloggerdao.isBloggerAvalable(mail)) {
+			String message = "An account with this email already exists ....";
+			req.setAttribute("message", message);
 			RequestDispatcher dispatcher = req.getRequestDispatcher("errorpage.jsp");
 			dispatcher.forward(req, res);
+			
 		}
 		else {
 			chain.doFilter(request, response);
+			
 		}
-		
 	}
 
 	/**

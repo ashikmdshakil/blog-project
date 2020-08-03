@@ -23,22 +23,31 @@ public class LogIn extends HttpServlet {
 	
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		if (bloggerservice.login(request.getParameter("mail"), request.getParameter("password"))) {
-			Blogger blogger = bloggerservice.bloggerInfo(request.getParameter("mail"));
-			HttpSession session = request.getSession();
-			session.setAttribute("blogger", blogger);
-			
-			request.setAttribute("blogs", blogservice.getBlogs());
-			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
-			dispatcher.forward(request, response);
-			
-		}
+		try {
+			if (bloggerservice.login(request.getParameter("mail"), request.getParameter("password"))) {
+				Blogger blogger = bloggerservice.bloggerInfo(request.getParameter("mail"));
+				HttpSession session = request.getSession();
+				session.setAttribute("blogger", blogger);
+				
+				request.setAttribute("blogs", blogservice.getBlogs());
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
+				dispatcher.forward(request, response);
+				
+			}
 
-		else {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
+			else {
+				String message = "Something went wrong. Please try agaian ....";
+				request.setAttribute("message", message);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("errorpage.jsp");
+				dispatcher.forward(request, response);
+			}
+		} catch (ServletException e) {
+			String message = "Something went wrong. Please try agaian ....";
+			request.setAttribute("message", message);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("errorpage.jsp");
 			dispatcher.forward(request, response);
-		}
+		} 
 	}
 
 }

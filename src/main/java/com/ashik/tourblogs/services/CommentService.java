@@ -8,9 +8,10 @@ import com.ashik.tourblogs.dao.CommentDao;
 import com.ashik.tourblogs.entities.Blog;
 import com.ashik.tourblogs.entities.Blogger;
 import com.ashik.tourblogs.entities.Comment;
+import com.ashik.tourblogs.repositories.CommentRepo;
 
 @Component
-public class CommentService {
+public class CommentService implements CommentRepo{
 	private CommentDao commentdao = CommentDao.getBean();
 	private Comment comment = Comment.getBean();
 	private Blogger blogger = Blogger.getBean();

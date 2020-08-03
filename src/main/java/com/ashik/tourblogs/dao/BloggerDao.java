@@ -49,7 +49,26 @@ public class BloggerDao {
 		session.close();
 		return exist;
 	}
-	
+	public boolean isBloggerAvalable(String mail) {
+		boolean exist = false;
+
+		Session session = (Session) HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+
+		Query query = session.createQuery("from Blogger where mail = :mail");
+		query.setParameter("mail", mail);
+
+		Blogger blogger = (Blogger) query.uniqueResult();
+
+		if (blogger != null) {
+			exist = true;
+		} else {
+			exist = false;
+		}
+		// session.beginTransaction().commit();
+		session.close();
+		return exist;
+	}
 	public Blogger getBloggerInfo(String mail) {
 		Session session = (Session) HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
