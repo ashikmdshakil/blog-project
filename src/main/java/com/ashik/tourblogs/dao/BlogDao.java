@@ -29,7 +29,7 @@ public class BlogDao {
 		SQLQuery query = session.createSQLQuery("select * from Blog where blogger_id = '"+id+"' order by time DESC;");
 		query.addEntity(Blog.class);
 		List<Blog> blogs = query.list();
-		
+		session.close();
 		return blogs;
 	}
 	
