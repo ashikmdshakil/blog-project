@@ -1,1 +1,1 @@
-web: java -jar path-to-my-project/target/my-project.jar 
+web:    java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
