@@ -12,16 +12,18 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.wiring.BeanConfigurerSupport;
 
-
+import com.ashik.tourblogs.dao.BloggerDao;
 import com.ashik.tourblogs.entities.Blogger;
 import com.ashik.tourblogs.services.BloggerService;
 
 @WebServlet("/signup")
 public class SignUp extends HttpServlet {
 	private BloggerService bloggerservice = BloggerService.getBean();
+	private BloggerDao bloggerdao = BloggerDao.getBean();
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		bloggerservice.signup(request.getParameter("name"), request.getParameter("mail"),
+
+		bloggerdao.saveBlogger(request.getParameter("name"), request.getParameter("mail"),
 				request.getParameter("password"));
 		response.sendRedirect("home.jsp");
 	}
