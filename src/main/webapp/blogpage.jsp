@@ -93,10 +93,11 @@
                         
                        <div style="display: block;">
                             <p style=" font-size: x-large;" style="font-size: x-large;"><c:out value="${blog.blog}"></c:out></p>
-                        </div>
-                        <c:if test="${blog.blogger.id == sessionScope.blogger.id }">
+                             <c:if test="${blog.blogger.id == sessionScope.blogger.id }">
 								<button type="submit" class="btn btn-alert" style="float: right">delete</button>
 						</c:if>
+                        </div>
+                       
                     </div>
                     <div class="col-3">
                     </div>
