@@ -1,1 +1,1 @@
-web: java -jar path-to-my-project/target/my-project.jar --post $PORT target/*war
+web: java -jar path-to-my-project/target/my-project.jar 
