@@ -32,7 +32,6 @@
                 padding-left: 30px;
                 padding-right: 30px;
             }
-            
             </style>
     </head>
     <body>
@@ -94,16 +93,14 @@
                        <div style="display: block;">
                             <p style=" font-size: x-large;" style="font-size: x-large;"><c:out value="${blog.blog}"></c:out></p>
                         </div>
-                        <c:if test="${blog.blogger.id == sessionScope.blogger.id }">
-								<button type="submit" class="btn btn-alert" style="float: right">delete</button>
-						</c:if>
+                        <button type="submit" class="btn btn-alert" style="float: right">delete</button>
                     </div>
                     <div class="col-3">
                     </div>
                 </div>
                
                
-				<!--comment box-->
+				<!--comment box
                 <div class="row">
                     <div class="col-4">
                     </div>
@@ -120,7 +117,7 @@
                     </div>
                     <div class="col-3">
                     </div>
-                </div>
+                </div> -->
 
                 <!--Comment section-->
                 <c:forEach items="${blog.comments}" var="comment">
@@ -131,9 +128,7 @@
                         <h4 style="float: left;"><c:out value="${comment.blogger.name}"></c:out></h3><p style="float: left; font-size: large;margin-left: 10px;"><c:out value="${comment.comment}"></c:out> </p>
 						<form action="deleteComment" method = "post">
 							<input type="hidden" name = "comment_id" value ="${comment.id}" >
-							<c:if test="${comment.blogger.id == sessionScope.blogger.id }">
-								<button type="submit" class="btn btn-alert" style="float: right">delete</button>
-							</c:if>
+							<button type="submit" class="btn btn-alert" style="float: right">delete</button>
 						</form>
                     </div>
                     <div class="col-3">

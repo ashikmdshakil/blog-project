@@ -3,10 +3,37 @@
   <filter>
     <display-name>LoginFilter</display-name>
     <filter-name>LoginFilter</filter-name>
-    <filter-class>com.ashik.tourblogs.controller.LoginFilter</filter-class>
+    <filter-class>com.ashik.tourblogs.filters.LoginFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
     <url-pattern>/login</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>BlogsFilter</display-name>
+    <filter-name>BlogsFilter</filter-name>
+    <filter-class>com.ashik.tourblogs.filters.BlogsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>BlogsFilter</filter-name>
+    <url-pattern>/blogs</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>MyBlogsFilter</display-name>
+    <filter-name>MyBlogsFilter</filter-name>
+    <filter-class>com.ashik.tourblogs.filters.MyBlogsFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>MyBlogsFilter</filter-name>
+    <url-pattern>/myblogs</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>LandingPageFilter</display-name>
+    <filter-name>LandingPageFilter</filter-name>
+    <filter-class>com.ashik.tourblogs.filters.LandingPageFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LandingPageFilter</filter-name>
+    <url-pattern>/</url-pattern>
   </filter-mapping>
 </web-app>

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -16,20 +17,28 @@ import org.springframework.beans.factory.wiring.BeanConfigurerSupport;
 
 import com.ashik.tourblogs.dao.BloggerDao;
 import com.ashik.tourblogs.entities.Blogger;
+import com.ashik.tourblogs.services.BlogService;
 import com.ashik.tourblogs.services.BloggerService;
 
 @WebServlet("/signup")
 public class SignUp extends HttpServlet {
 	private BloggerService bloggerservice = BloggerService.getBean();
 	private BloggerDao bloggerdao = BloggerDao.getBean();
+	BlogService blogservice = BlogService.getBean();
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
 		bloggerdao.saveBlogger(request.getParameter("name"), request.getParameter("mail"),
 				request.getParameter("password"));
-		System.out.println(" "+request.getParameter("name")+" "+request.getParameter("mail")+" "+request.getParameter("password"));
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+		Blogger blogger = bloggerservice.bloggerInfo(request.getParameter("mail"));
+		HttpSession session = request.getSession();
+		session.setAttribute("blogger", blogger);
+		
+		request.setAttribute("blogs", blogservice.getBlogs());
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
 		dispatcher.forward(request, response);
+		
 	}
 
 }

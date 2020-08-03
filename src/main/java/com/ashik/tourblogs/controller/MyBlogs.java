@@ -22,7 +22,7 @@ public class MyBlogs extends HttpServlet{
 		HttpSession session = request.getSession();
 		Blogger blogger = (Blogger) session.getAttribute("blogger");
 		request.setAttribute("blogs", blogservice.getMyBlogs(blogger.getId()));
-		RequestDispatcher dispatcher = request.getRequestDispatcher("blogpage.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("myblogpage.jsp");
 		dispatcher.forward(request, response);
 	}
 }
