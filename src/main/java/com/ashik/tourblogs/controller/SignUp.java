@@ -27,6 +27,7 @@ public class SignUp extends HttpServlet {
 
 		bloggerdao.saveBlogger(request.getParameter("name"), request.getParameter("mail"),
 				request.getParameter("password"));
+		System.out.println(" "+request.getParameter("name")+" "+request.getParameter("mail")+" "+request.getParameter("password"));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 		dispatcher.forward(request, response);
 	}
