@@ -25,6 +25,7 @@ public class BloggerDao {
 		blogger.setPassword(password);
 		session.save(blogger);
 		txn.commit();
+		session.close();
 	}
 
 	public boolean isUserAvalable(String mail, String password) {
