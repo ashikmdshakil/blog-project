@@ -7,7 +7,7 @@ import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
 	public static SessionFactory getSessionFactory() {
-		Configuration config = new Configuration().configure("myhibernate.cfg.xml")
+		Configuration config = new Configuration().configure()
 				.addAnnotatedClass(com.ashik.tourblogs.entities.Blogger.class)
 				.addAnnotatedClass(com.ashik.tourblogs.entities.Blog.class)
 				.addAnnotatedClass(com.ashik.tourblogs.entities.Comment.class);
