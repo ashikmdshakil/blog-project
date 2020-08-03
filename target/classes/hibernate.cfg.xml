@@ -8,6 +8,6 @@
   <property name="hibernate.connection.url">jdbc:postgresql://ec2-35-175-155-248.compute-1.amazonaws.com:5432/d7tnuhs6o8m0ri</property>
   <property name="hibernate.connection.username">esrhrjnnuzcpuj</property>
   <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-  <property name="hibernate.hbm2ddl.auto">update</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
  </session-factory>
 </hibernate-configuration>
